@@ -7,6 +7,13 @@ func Getxattr(path, name string) ([]byte, error) {
 	if err != nil {
 		return nil, &XAttrError{"getxattr", path, name, err}
 	}
+  
+        // If size is zero we must return with a nil slice otherwise getxattr would
+        // bail out on zeor-length buf
+        if size == 0 {
+            return nil, nil
+        }
+
 	buf := make([]byte, size)
 	// Read into buffer of that size.
 	read, err := getxattr(path, name, &buf[0], size, 0, 0)
