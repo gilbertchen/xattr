@@ -63,5 +63,3 @@ Listing names and values
      % $GOBIN/xattr -l ~/testfile
      username: dave
 
-
-
